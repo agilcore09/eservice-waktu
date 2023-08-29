@@ -22,7 +22,7 @@
 
     <!-- Custom styles for this template -->
     <link href="{{ asset('nasabah/css/landing-page.min.css') }}" rel="stylesheet">
-    
+
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
@@ -84,6 +84,12 @@
             font-family: 'Century Gothic', Arial;
             line-height: 1;
             font-weight: bold;
+        }
+
+        @media screen and (min-width: 1000px) {
+            .collapse ul li {
+                display: none
+            }
         }
     </style>
 
