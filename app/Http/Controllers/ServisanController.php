@@ -319,8 +319,14 @@ class ServisanController extends Controller
     }
 
 
-    public function data_sort()
+    public function data_sort(Request $request)
     {
-        return view('teknisi.servisan.data_sort');
+
+        // jika tidak login 
+        if ($request->session()->get('id') == null) {
+            return redirect("login-teknisi")->with('message', Alert::error('Belum login', 'Kamu Belum Login Sebagai Teknisi'));
+        }
+        $data = DB::table('costumer')->orderby('id', 'ASC')->where('id_teknisi', $request->session()->get('id'))->get();
+        return view('teknisi.servisan.data_sort', compact('data'));
     }
 }
