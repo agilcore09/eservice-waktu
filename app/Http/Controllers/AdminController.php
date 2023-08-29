@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\models\teknisi;
-use App\models\costumer;
+use App\Models\teknisi;
+use App\Models\costumer;
 use Hash;
 use Session;
 use App\Models\User;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Http\Request;
-use DB;
+use Illuminate\Support\Facades\DB;
 
 
 class AdminController extends Controller
@@ -27,7 +27,7 @@ class AdminController extends Controller
 
     public function home()
     {
-        $data = Teknisi::count();
+        $data = teknisi::count();
         $cos = costumer::count();
         $kerja = costumer::where('status_servisan', 0)->count();
         $selesai = costumer::where('status_servisan', 1)->count();

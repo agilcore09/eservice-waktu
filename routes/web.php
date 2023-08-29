@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Artisan;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,7 +27,6 @@ Route::get('/show-teknisi', [App\Http\Controllers\AdminController::class, 'show'
 Route::get('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
 Route::get('/del', [App\Http\Controllers\AdminController::class, 'del'])->name('del');
 Route::get('/hapus', [App\Http\Controllers\AdminController::class, 'hapus'])->name('hapus');
-
 
 //simpan teknisi
 Route::post('/save-teknisi', [App\Http\Controllers\AdminController::class, 'store'])->name('store-teknisi');
@@ -80,17 +80,17 @@ Route::post('/cek-kostumer', [App\Http\Controllers\HomeController::class, 'costu
 Route::get('/home-kostumer', [App\Http\Controllers\HomeController::class, 'home'])->name('home-kostumer');
 
 
-Route::get('/vcsr', function() {
+Route::get('/vcsr', function () {
     $exitCode = Artisan::call('view:clear');
     return 'View cache cleared';
 });
-Route::get('/cc', function() {
+Route::get('/cc', function () {
     $exitCode = Artisan::call('cache:clear');
     return 'Application cache cleared';
 });
 
 
-Route::get('/cr', function() {
+Route::get('/cr', function () {
     $exitCode = Artisan::call('route:cache');
     return 'Routes cache cleared';
 });
