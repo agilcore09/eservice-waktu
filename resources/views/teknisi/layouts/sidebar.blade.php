@@ -2,11 +2,10 @@
      <!-- Sidebar user panel (optional) -->
      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
          <div class="image">
-             <img src="{{ asset('AdminLTE/dist/img/user2-160x160.jpg') }}" class="img-circle elevation-2"
-                 alt="User Image">
+             <img src="{{ asset('AdminLTE/dist/img/user2-160x160.jpg') }}" class="img-circle elevation-2" alt="User Image">
          </div>
          <div class="info">
-             <a href="{{ route('homeser')}}" class="d-block"> {{session()->get('nama')}}</a>
+             <a href="{{ route('homeser') }}" class="d-block"> {{ session()->get('nama') }}</a>
 
          </div>
      </div>
@@ -29,7 +28,7 @@
                  </a>
                  <ul class="nav nav-treeview">
                      <li class="nav-item">
-                         <a href="{{ route ('show_Servisan')}}" class="nav-link">
+                         <a href="{{ route('show_Servisan') }}" class="nav-link">
                              <i class="far fa-circle nav-icon"></i>
                              <p>Servisan</p>
                          </a>
@@ -38,23 +37,32 @@
                  </ul>
 
                  <ul class="nav nav-treeview">
-                    <li class="nav-item">
-                        <a href="{{ route ('show_Servisan_selesai')}}" class="nav-link">
-                            <i class="far fa-circle nav-icon"></i>
-                            <p>Servisan Selesai</p>
-                        </a>
-                    </li>
+                     <li class="nav-item">
+                         <a href="{{ route('show_Servisan_selesai') }}" class="nav-link">
+                             <i class="far fa-circle nav-icon"></i>
+                             <p>Servisan Selesai</p>
+                         </a>
+                     </li>
 
-                </ul>
+                 </ul>
 
                  <ul class="nav nav-treeview">
                      <li class="nav-item">
-                         <a href="{{ route('harga_servis')}}" class="nav-link">
+                         <a href="{{ route('harga_servis') }}" class="nav-link">
                              <i class="far fa-circle nav-icon"></i>
                              <p>Harga Servis</p>
                          </a>
                      </li>
 
+                 </ul>
+
+                 <ul class="nav nav-treeview">
+                     <li class="nav-item">
+                         <a href="{{ url('/') }}/data-sort" class="nav-link">
+                             <i class="far fa-circle nav-icon"></i>
+                             <p>Data Sort</p>
+                         </a>
+                     </li>
                  </ul>
              </li>
 

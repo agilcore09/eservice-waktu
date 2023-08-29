@@ -34,7 +34,7 @@ class ServisanController extends Controller
 
         $data = DB::table('costumer')->where('status_servisan', 0)->orWhere('status_servisan', 1)->orWhere('status_servisan', 2)->orderby('estimasi', 'ASC')->get();
 
-        $data = $data->toArray();
+        // $data = $data->toArray();
         // dd($data);
 
         // do {
@@ -136,7 +136,8 @@ class ServisanController extends Controller
         // $now = ;
         // $now = strtotime('Y-m-d H:i');
 
-        $date = DateTime::createFromFormat('Y-m-d g:i a', '2018-05-16 10:28 PM');
+        $date = DateTime::createFromFormat('d/m/Y g:i a', '2018-05-16 10:28 PM');
+        // $date = DateTime::createFromFormat('Y-m-d g:i a', '2018-05-16 10:28 PM');
         $date = $request->estimasi;
         // $date->format('Y-m-d H:i:s');
         // dd($date);
@@ -294,14 +295,14 @@ class ServisanController extends Controller
         //Alert::success('Berhasil', 'Sukses Menyimpan');
         return view('teknisi.servisan.list_harga', compact('data', 'keyword'));
     }
-    
+
     public function cari_servisan(Request $request)
     {
         $keyword = $request->search;
 
         $data = costumer::where('id_teknisi', $request->session()->get('id'))
 
-            ->where('nama_costumer', 'like', "%" . $keyword . "%",)
+            ->where('nama_costumer', 'like', "%" . $keyword . "%")
 
             ->get();
         // dd($data);
@@ -315,5 +316,11 @@ class ServisanController extends Controller
             ->get();
         // dd($data);
         return view('teknisi.servisan.list_harga', compact('data', 'keyword'));
+    }
+
+
+    public function data_sort()
+    {
+        return view('teknisi.servisan.data_sort');
     }
 }

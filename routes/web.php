@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Artisan;
 
+use App\Http\Controllers\ServisanController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -54,8 +56,8 @@ Route::get('/show-servisan', [App\Http\Controllers\ServisanController::class, 'i
 Route::get('/show-servisan-selesai', [App\Http\Controllers\ServisanController::class, 'index_selesai'])->name('show_Servisan_selesai');
 Route::get('/show-input-servisan', [App\Http\Controllers\ServisanController::class, 'create'])->name('create_Servisan');
 Route::post('/proses-input-servisan', [App\Http\Controllers\ServisanController::class, 'store'])->name('store_servisan');
-
 Route::get('/list-harga', [App\Http\Controllers\ServisanController::class, 'harga'])->name('harga_servis');
+Route::get('/data-sort', [ServisanController::class, 'data_sort']);
 //Cari servisan
 Route::get('/cari-servisan', [App\Http\Controllers\ServisanController::class, 'cari_servisan'])->name('cari_servisan');
 //Cari harga servisan
