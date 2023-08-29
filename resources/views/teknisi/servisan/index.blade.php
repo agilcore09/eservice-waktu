@@ -296,18 +296,18 @@
                                                 </button>
 
                                                 @if ($v->status_servisan == 1)
-                                                    </button></a> <a
+                                                    {{-- </button></a> <a
                                                         onclick="return confirm('anda yakin ingin klaim Garansi Atas NAMA : {{ $v->nama_costumer }}')"
                                                         href="{{ route('garansi', $v->id) }}" class="delete-confirm">
                                                         <button class="btn btn-dark btn-xs" id="add">
                                                             <i class="fa fa-sync-alt"></i>
 
-                                                        </button>
+                                                        </button> --}}
                                                 @endif
 
 
                                                 @if ($v->status_servisan == 2)
-                                                    </button></a> <a
+                                                    {{-- </button></a> <a
                                                         onclick="return confirm('anda yakin klaim Garansi Atas NAMA : {{ $v->nama_costumer }} telah selesai ??') "
                                                         href="{{ route('selesai_garansi', $v->id) }}"
                                                         class="delete-confirm">
@@ -317,7 +317,7 @@
                                                     </a>
                                                     {{-- @endif
                                             
-                                        @if ($v->status_servisan == 1) --}}
+                                        @if ($v->status_servisan == 1)  --}}
                                                 @endif
                                                 </button></a> <a
                                                     onclick="return confirm('Cetak Struk Atas NAMA : {{ $v->nama_costumer }}??') "

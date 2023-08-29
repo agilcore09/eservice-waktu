@@ -131,7 +131,7 @@
             </div> --}}
             <div class="input-group date" id="id_0">
                 <input type="text" value="" class="form-control" name="estimasi"
-                    placeholder="MM/DD/YYYY hh:mm:ss" required />
+                    placeholder="MM/DD/YYYY HH:mm:ss" required />
             </div>
         </div>
 
