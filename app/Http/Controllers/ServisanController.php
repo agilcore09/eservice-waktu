@@ -136,7 +136,8 @@ class ServisanController extends Controller
         // $now = ;
         // $now = strtotime('Y-m-d H:i');
 
-        $date = DateTime::createFromFormat('d/m/Y g:i a', '2018-05-16 10:28 PM');
+        // $date = DateTime::createFromFormat('d/m/Y g:i a', '2018-05-16 10:28 PM');
+        $date = Carbon::now()->format('d/m/Y H:i:s', '2018-05-16 10:28 PM');
         // $date = DateTime::createFromFormat('Y-m-d g:i a', '2018-05-16 10:28 PM');
         $date = $request->estimasi;
         // $date->format('Y-m-d H:i:s');
