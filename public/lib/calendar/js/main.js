@@ -7,7 +7,7 @@
     showClose: true,
     showClear: true,
     showTodayButton: true,
-    format: "DD/MM/YYYY HH:mm:ss",
+    format: "DD-MM-YYYY HH:mm:ss",
     icons: {
 		  time:'fa fa-clock-o',
 

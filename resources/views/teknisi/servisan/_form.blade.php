@@ -34,7 +34,7 @@
         <div class=" col-sm-6">
             <div class="form-group">
                 <label>No HP</label>
-                <input type="text" class="form-control" name="no_hp" class="form-control" autocomplete="off"
+                <input type="number" class="form-control" name="no_hp" class="form-control" autocomplete="off"
                     value="" required />
             </div>
         </div>
@@ -42,7 +42,7 @@
         <div class="col-sm-6">
             <div class="form-group">
                 <label>Biaya</label>
-                <input type="text" width="10px" class="form-control" name="biaya" class="form-control"
+                <input type="number" width="10px" class="form-control" name="biaya" class="form-control"
                     autocomplete="off" value="" required />
             </div>
         </div>

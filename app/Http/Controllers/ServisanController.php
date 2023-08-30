@@ -22,19 +22,17 @@ class ServisanController extends Controller
     {
 
         $keyword = null;
-        // $data = DB::table('costumer')->where('status_servisan',0 )
-        //                             ->orWhere('status_servisan',1 )
-        //                             ->orWhere('status_servisan',2 )
-        //     // ->where('status_servisan', 2)
-        //     ->orderby("biaya", "DESC")
+        $data = DB::table('costumer')->where('id_teknisi', $request->session()->get('id'))
+            ->where('status_servisan', 0)
+            ->orWhere('status_servisan', 1)
+            ->orWhere('status_servisan', 2)
+            ->orderby("estimasi", "ASC")
 
-        //     ->where('id_teknisi', $request->session()->get('id'))
-        //     ->get();
+            ->get();
 
+        // $data = DB::table('costumer')->where('status_servisan', 0)->orWhere('status_servisan', 1)->orWhere('status_servisan', 2)->orderby('estimasi', 'ASC')->where('id_teknisi', $request->session()->get('id'))->get();
 
-        $data = DB::table('costumer')->where('status_servisan', 0)->orWhere('status_servisan', 1)->orWhere('status_servisan', 2)->orderby('estimasi', 'ASC')->get();
-
-        // $data = $data->toArray();
+        $data = $data->toArray();
         // dd($data);
 
         // do {
@@ -51,10 +49,6 @@ class ServisanController extends Controller
 
         return view('teknisi.servisan.index', compact('data', 'keyword'));
     }
-
-
-
-
 
     public function index_selesai(Request $request)
     {
@@ -137,8 +131,9 @@ class ServisanController extends Controller
         // $now = strtotime('Y-m-d H:i');
 
         // $date = DateTime::createFromFormat('d/m/Y g:i a', '2018-05-16 10:28 PM');
-        $date = Carbon::now()->format('d/m/Y H:i:s', '2018-05-16 10:28 PM');
-        // $date = DateTime::createFromFormat('Y-m-d g:i a', '2018-05-16 10:28 PM');
+        // $date = Carbon::now()->format('d/m/Y H:i:s', '2018-05-16 10:28 PM');
+        // $date = Carbon::now()->format('d-m-Y H:i:s', ['class' => 'form-control']);
+        // $date = DateTime::createFromFormat('Y-m-d H:i a', '2018-05-16 10:28 PM');
         $date = $request->estimasi;
         // $date->format('Y-m-d H:i:s');
         // dd($date);
