@@ -326,7 +326,7 @@ class ServisanController extends Controller
         if ($request->session()->get('id') == null) {
             return redirect("login-teknisi")->with('message', Alert::error('Belum login', 'Kamu Belum Login Sebagai Teknisi'));
         }
-        $data = DB::table('costumer')->orderby('id', 'ASC')->where('id_teknisi', $request->session()->get('id'))->get();
+        $data = DB::table('costumer')->orderby('id', 'ASC')->get();
         return view('teknisi.servisan.data_sort', compact('data'));
     }
 }
