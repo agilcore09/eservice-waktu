@@ -42,18 +42,54 @@
 
 
                         <br>
-                        <div class="col-md-4 offset-md-8">
-                            <form action="{{ route('cari_servisan') }}" method="get">
-                                <div class="input-group input-group-lg">
-                                    <input type="search" name="search" class="form-control" value="{{ $keyword }}"
-                                        placeholder="Silahkan Cari Disini">
-                                    <div class="input-group-append">
-                                        <button type="submit" class="btn btn-secondary">
-                                            <i class="fa fa-search"></i>
-                                        </button>
+
+                        <div class="row">
+                            <div class="col-md-3">
+                                <form action="">
+                                    <div class="form-group">
+
+                                        <div class="form-group input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+                                            </div>
+                                            <input name="" class="form-control" placeholder="Full name"
+                                                type="date">
+                                        </div>
                                     </div>
-                                </div>
-                            </form>
+                                </form>
+                            </div>
+                            <div class="col-md-3">
+                                <form action="">
+                                    <div class="form-group">
+
+                                        <div class="form-group input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+                                            </div>
+                                            <input name="" class="form-control" placeholder="Full name"
+                                                type="date">
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+
+                            <div class="col-2">
+                                <button class="btn btn-primary">Terapkan</button>
+                            </div>
+
+                            <div class="col-md-4">
+                                <form action="{{ route('cari_servisan') }}" method="get">
+                                    <div class="input-group input-group-lg">
+                                        <input type="search" name="search" class="form-control"
+                                            value="{{ $keyword }}" placeholder="Silahkan Cari Disini">
+                                        <div class="input-group-append">
+                                            <button type="submit" class="btn btn-secondary">
+                                                <i class="fa fa-search"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
 
                         <div class="card-body table-wrap">
@@ -91,11 +127,11 @@
                                             <td>Rp. {{ number_format($v->biaya) }}</td>
                                             <td>
                                                 @php
-                                                    
+
                                                     $dt = strtotime($v->tgl_masuk);
                                                     $getDateTime = date('F d, Y H:i:s', $dt);
                                                     echo $getDateTime;
-                                                    
+
                                                 @endphp
 
                                             </td>
@@ -344,7 +380,7 @@
 
                                 </tbody>
                             </table>
-
+                            {{-- {{ $data->links() }} --}}
 
                         </div>
 

@@ -27,12 +27,10 @@ class ServisanController extends Controller
             ->orWhere('status_servisan', 1)
             ->orWhere('status_servisan', 2)
             ->orderby("estimasi", "ASC")
-
             ->get();
 
         // $data = DB::table('costumer')->where('status_servisan', 0)->orWhere('status_servisan', 1)->orWhere('status_servisan', 2)->orderby('estimasi', 'ASC')->where('id_teknisi', $request->session()->get('id'))->get();
 
-        $data = $data->toArray();
         // dd($data);
 
         // do {
@@ -45,7 +43,8 @@ class ServisanController extends Controller
         //         }
         //     }
         // } while ($swapped);
-        // dd($data);
+
+        // $data = $data->paginate(10);
 
         return view('teknisi.servisan.index', compact('data', 'keyword'));
     }
@@ -63,7 +62,6 @@ class ServisanController extends Controller
             ->get();
 
         $data = $data->toArray();
-
 
         // do {
         //     $swapped = false;
@@ -304,6 +302,7 @@ class ServisanController extends Controller
         // dd($data);
         return view('teknisi.servisan.index', compact('data', 'keyword'));
     }
+
     public function cari_harga(Request $request)
     {
         $keyword = $request->search;
@@ -314,15 +313,13 @@ class ServisanController extends Controller
         return view('teknisi.servisan.list_harga', compact('data', 'keyword'));
     }
 
-
     public function data_sort(Request $request)
     {
-
         // jika tidak login 
         if ($request->session()->get('id') == null) {
             return redirect("login-teknisi")->with('message', Alert::error('Belum login', 'Kamu Belum Login Sebagai Teknisi'));
         }
-        $data = DB::table('costumer')->orderby('id', 'ASC')->get();
+        $data = DB::table('costumer')->orderby('estimasi', 'ASC')->get();
         return view('teknisi.servisan.data_sort', compact('data'));
     }
 }
