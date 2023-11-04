@@ -4,12 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\costumer;
 use App\Models\kerusakan;
-use App\Models\teknisi;
 use Carbon\Carbon;
-use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use RealRashid\SweetAlert\Facades\Alert;
+use App\Helpers\OrderHelper;
 
 class ServisanController extends Controller
 {
@@ -22,12 +21,22 @@ class ServisanController extends Controller
     {
 
         $keyword = null;
-        $data = DB::table('costumer')->where('id_teknisi', $request->session()->get('id'))
-            ->where('status_servisan', 0)
-            ->orWhere('status_servisan', 1)
-            ->orWhere('status_servisan', 2)
-            ->orderby("estimasi", "ASC")
-            ->get();
+
+        if ($request->dateIn && $request->dateTo != null) {
+
+            $data = DB::table('costumer')
+                ->whereBetween('tgl_masuk', [$request->dateIn, $request->dateTo])
+                ->where('id_teknisi', $request->session()->get('id'))
+                ->get();
+        } else {
+            $data = DB::table('costumer')->where('id_teknisi', $request->session()->get('id'))
+                ->where('status_servisan', 0)
+                ->orWhere('status_servisan', 1)
+                ->orWhere('status_servisan', 2)
+                ->orderby("estimasi", "ASC")
+                ->get();
+        }
+
 
         // $data = DB::table('costumer')->where('status_servisan', 0)->orWhere('status_servisan', 1)->orWhere('status_servisan', 2)->orderby('estimasi', 'ASC')->where('id_teknisi', $request->session()->get('id'))->get();
 

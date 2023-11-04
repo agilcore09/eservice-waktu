@@ -44,37 +44,48 @@
                         <br>
 
                         <div class="row">
-                            <div class="col-md-3">
-                                <form action="">
-                                    <div class="form-group">
 
-                                        <div class="form-group input-group">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+                            <div class="col-8">
+                                <div class="row pl-3">
+                                    <div class="col-md-4">
+                                        <form method="GET">
+
+
+                                            <div class="form-group">
+
+                                                <div class="form-group input-group">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text"><i
+                                                                class="fa-solid fa-calendar-days"></i> </span>
+                                                    </div>
+                                                    <input name="dateIn" class="form-control" placeholder="Full name"
+                                                        type="date">
+                                                </div>
                                             </div>
-                                            <input name="" class="form-control" placeholder="Full name"
-                                                type="date">
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                            <div class="col-md-3">
-                                <form action="">
-                                    <div class="form-group">
 
-                                        <div class="form-group input-group">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+                                    </div>
+                                    <div class="col-md-4">
+
+                                        <div class="form-group">
+
+                                            <div class="form-group input-group">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"><i class="fa-solid fa-calendar-days"></i>
+                                                    </span>
+                                                </div>
+                                                <input name="dateTo" class="form-control" placeholder="Full name"
+                                                    type="date">
                                             </div>
-                                            <input name="" class="form-control" placeholder="Full name"
-                                                type="date">
                                         </div>
-                                    </div>
-                                </form>
-                            </div>
 
-                            <div class="col-2">
-                                <button class="btn btn-primary">Terapkan</button>
+                                    </div>
+
+                                    <div class="col-1">
+                                        <button class="btn btn-primary" type="submit"> <i class="fa-solid fa-stamp"></i>
+                                            Terapkan</button>
+                                    </div>
+                                    </form>
+                                </div>
                             </div>
 
                             <div class="col-md-4">

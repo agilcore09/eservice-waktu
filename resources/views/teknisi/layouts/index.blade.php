@@ -31,6 +31,7 @@
     <link rel="stylesheet" href="{{ asset('countdown/TimeCircles.css') }}">
     <link rel="stylesheet" href="{{ url('/') }}assets/css/custom">
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css ">
     {{-- datetimepicker --}}
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="{{ asset('lib/calendar/css/style.css') }}">

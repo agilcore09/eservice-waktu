@@ -81,8 +81,8 @@ return [
     */
 
     'timezone' => 'Asia/Makassar',
-'locale' => 'id',
-'faker_locale' => 'id_ID',
+    'locale' => 'id',
+    'faker_locale' => 'id_ID',
 
     /*
     |--------------------------------------------------------------------------
@@ -164,6 +164,7 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
         RealRashid\SweetAlert\SweetAlertServiceProvider::class,
+        App\Providers\OrderByDateProviders::class,
 
         /*
          * Package Service Providers...
@@ -234,6 +235,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'PDF' => Barryvdh\DomPDF\Facade::class,
+        'OrderByDate' => App\Helpers\OrderHelper::class,
 
     ],
 
