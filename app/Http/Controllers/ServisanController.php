@@ -24,6 +24,8 @@ class ServisanController extends Controller
 
         if ($request->dateIn && $request->dateTo != null) {
 
+            // $data = OrderHelper::orderDate($request->dateIn, $request->dateTo, $request->session()->get('id'));
+
             $data = DB::table('costumer')
                 ->whereBetween('tgl_masuk', [$request->dateIn, $request->dateTo])
                 ->where('id_teknisi', $request->session()->get('id'))
@@ -62,15 +64,19 @@ class ServisanController extends Controller
     {
 
         $keyword = null;
-        $data = DB::table('costumer')->where('status_servisan', 4)
-            // ->where('status_servisan', 2)
-            ->orderby("updated_at", "ASC")
 
-            ->where('id_teknisi', $request->session()->get('id'))
+        if ($request->dateIn && $request->dateTo != null) {
+            $data = OrderHelper::orderDateClear($request->dateIn, $request->dateTo, $request->session()->get('id'));
+        } else {
+            $data = DB::table('costumer')->where('status_servisan', 4)
+                ->orderby("updated_at", "ASC")
+                ->where('id_teknisi', $request->session()->get('id'))
+                ->get();
+        }
 
-            ->get();
 
-        $data = $data->toArray();
+
+        // $data = $data->toArray();
 
         // do {
         //     $swapped = false;

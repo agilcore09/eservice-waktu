@@ -7,20 +7,24 @@ use Illuminate\Support\Facades\DB;
 class OrderHelper
 {
 
-    public $table;
-    public $datein;
-    public $dateto;
-
-    public function __construct($table, $dateIn, $dateTo)
+    public static function orderDate($dateIn, $dateTo, $session)
     {
-        $this->table = $table;
-        $this->datein = $dateIn;
-        $this->dateto = $dateTo;
+        $data = DB::table('costumer')
+            ->whereBetween('tgl_masuk', [$dateIn, $dateTo])
+            ->where('id_teknisi', $session)
+            ->get();
+
+        return $data;
     }
 
-    public function ByDate()
+    public static function orderDateClear($dateIn, $dateTo, $session)
     {
-        $data = DB::table($this->table)->whereBetween('tgl_masuk', [$this->dateto, $this->datein])->get();
+        $data = DB::table('costumer')->where('status_servisan', 4)
+            ->whereBetween('tgl_masuk', [$dateIn, $dateTo])
+            ->orderby("updated_at", "ASC")
+            ->where('id_teknisi', $session)
+            ->get();
+
         return $data;
     }
 }
