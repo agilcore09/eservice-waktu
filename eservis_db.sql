@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Waktu pembuatan: 30 Jan 2022 pada 16.19
--- Versi server: 10.4.22-MariaDB
--- Versi PHP: 8.0.13
+-- Host: localhost:3306
+-- Waktu pembuatan: 06 Nov 2023 pada 11.35
+-- Versi server: 8.0.30
+-- Versi PHP: 8.1.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `eservis_db`
+-- Database: `eservis`
 --
 
 -- --------------------------------------------------------
@@ -28,7 +28,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `costumer` (
-  `id` bigint(20) UNSIGNED NOT NULL,
+  `id` bigint UNSIGNED NOT NULL,
   `id_teknisi` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `kd_transaksi` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `nama_costumer` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -36,28 +36,15 @@ CREATE TABLE `costumer` (
   `no_hp` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `biaya` double NOT NULL,
   `kerusakan` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `kategori` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `estimasi` timestamp NULL DEFAULT NULL,
   `tgl_masuk` date NOT NULL,
-  `tgl_selesai` date DEFAULT NULL,
+  `tgl_selesai` datetime DEFAULT NULL,
   `status` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `status_servisan` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data untuk tabel `costumer`
---
-
-INSERT INTO `costumer` (`id`, `id_teknisi`, `kd_transaksi`, `nama_costumer`, `alamat`, `no_hp`, `biaya`, `kerusakan`, `tgl_masuk`, `tgl_selesai`, `status`, `status_servisan`, `created_at`, `updated_at`) VALUES
-(1, '27', 'CS:202211001', 'adyat', 'pk7', '88', 200, 'lcd', '2022-01-28', '2022-01-28', '0', '1', '2022-01-27 23:46:12', '2022-01-28 06:07:18'),
-(2, '27', 'CS:202211002', 's', 's', '2', 2, 's', '2022-01-28', '2022-01-28', '0', '0', '2022-01-27 23:50:41', '2022-01-27 23:54:44'),
-(3, '1', 'CS:202211003', 'rika', 'pk7', '0899566', 2000, 'ganti lcdip', '2022-01-28', '2022-01-28', '0', '1', '2022-01-28 06:12:01', '2022-01-30 03:39:47'),
-(4, '1', 'CS:202211004', 'ARI', 'PK7', '099', 200, 'LCD', '2022-01-28', '2022-01-30', '1', '1', '2022-01-28 06:27:11', '2022-01-30 01:39:08'),
-(5, '1', 'CS:202211005', 'adyat', 'pk7', '0899', 2000, 'lcd', '2022-01-28', '2022-01-30', '1', '3', '2022-01-28 06:49:18', '2022-01-30 01:34:54'),
-(6, '1', 'CS:202211006', 'd', 'd', '3', 3, 'd', '2022-01-28', '2022-01-29', '1', '0', '2022-01-28 06:59:27', '2022-01-28 18:38:30'),
-(7, '1', 'CS:202211007', 'erik', 'pk7', '99', 12000, 'lcd oppo', '2022-01-30', NULL, '0', '0', '2022-01-30 06:19:49', '2022-01-30 06:19:49'),
-(8, '1', 'CS:202211008', 'riska', 'btp', '0899', 300000, 'lcd iphone', '2022-01-30', NULL, '0', '0', '2022-01-30 06:22:39', '2022-01-30 06:22:39'),
-(9, '1', 'CS:202211009', 'risal', 'pk7', '0899', 12000, 'hp', '2022-01-30', NULL, '1', '0', '2022-01-30 06:28:32', '2022-01-30 06:28:32');
 
 -- --------------------------------------------------------
 
@@ -66,13 +53,13 @@ INSERT INTO `costumer` (`id`, `id_teknisi`, `kd_transaksi`, `nama_costumer`, `al
 --
 
 CREATE TABLE `failed_jobs` (
-  `id` bigint(20) UNSIGNED NOT NULL,
+  `id` bigint UNSIGNED NOT NULL,
   `uuid` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `connection` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `queue` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
   `exception` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `failed_at` timestamp NOT NULL DEFAULT current_timestamp()
+  `failed_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -82,7 +69,7 @@ CREATE TABLE `failed_jobs` (
 --
 
 CREATE TABLE `kerusakan` (
-  `id` bigint(20) UNSIGNED NOT NULL,
+  `id` bigint UNSIGNED NOT NULL,
   `kerusakan` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `biaya` double NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -94,9 +81,29 @@ CREATE TABLE `kerusakan` (
 --
 
 INSERT INTO `kerusakan` (`id`, `kerusakan`, `biaya`, `created_at`, `updated_at`) VALUES
-(1, 'ganti lcd oppo a37', 2000, '2022-01-28 06:10:56', '2022-01-28 06:10:56'),
-(2, 'ic cas', 12, NULL, '2022-01-30 05:15:34'),
-(3, 'cas', 12, NULL, NULL);
+(6, 'Tombol Rusak', 100000, '2023-07-11 02:35:15', '2023-07-11 02:35:15'),
+(7, 'Tombol  Volume Rusak', 100000, '2023-07-11 02:35:40', '2023-07-11 02:35:40'),
+(8, 'Wifi Tidak Berfungsi', 100000, '2023-07-11 02:36:18', '2023-07-11 02:36:18'),
+(9, 'GPS Tidak Berfungsi', 100000, '2023-07-11 02:38:10', '2023-07-11 02:38:10'),
+(10, 'Notifikasi Tidak Muncul', 100000, '2023-07-11 02:38:46', '2023-07-11 02:38:46'),
+(11, 'Batrei Sulit Terisi', 100000, '2023-07-11 02:39:18', '2023-07-11 02:39:18'),
+(12, 'Batrei Cepat Habis', 120000, '2023-07-11 02:40:30', '2023-07-11 02:40:30'),
+(13, 'Sinyal Hilang', 130000, '2023-07-11 02:41:23', '2023-07-11 02:41:23'),
+(14, 'Ganti Casing', 120000, '2023-07-11 02:43:03', '2023-07-11 02:43:03'),
+(15, 'Ganti Casing', 120000, '2023-07-11 02:43:04', '2023-07-11 02:43:04'),
+(16, 'Ganti Casing', 120000, '2023-07-11 02:43:04', '2023-07-11 02:43:04'),
+(17, 'Ganti Casing', 120000, '2023-07-11 02:43:04', '2023-07-11 02:43:04'),
+(18, 'Insert SIM', 100000, '2023-07-11 02:43:32', '2023-07-11 02:43:32'),
+(19, 'LCD Bergaris', 150000, '2023-07-11 02:44:03', '2023-07-11 02:44:03'),
+(20, 'Hp Terestar Sendiri', 100000, '2023-07-11 02:44:54', '2023-07-11 02:44:54'),
+(21, 'Hp Sering panas', 100000, '2023-07-11 02:45:25', '2023-07-11 02:45:25'),
+(22, 'Hp Kemasukan Air', 150000, '2023-07-11 02:46:10', '2023-07-11 02:46:10'),
+(23, 'Layar Sentu Tidak Responsif', 150000, '2023-07-11 02:47:09', '2023-07-11 02:47:09'),
+(24, 'Google Play Tiba-tiba Berhenti', 150000, '2023-07-11 02:47:39', '2023-07-11 02:47:39'),
+(25, 'Hp Mati Total', 200000, '2023-07-11 02:48:12', '2023-07-11 02:48:12'),
+(26, 'bootloop', 200000, '2023-07-11 02:49:28', '2023-07-11 02:49:28'),
+(27, 'Kerusakan LCD', 300000, '2023-07-11 02:50:36', '2023-07-11 02:50:36'),
+(28, 'Kerusakan Lainnya', 0, '2023-07-11 02:56:08', '2023-07-11 02:56:08');
 
 -- --------------------------------------------------------
 
@@ -105,9 +112,9 @@ INSERT INTO `kerusakan` (`id`, `kerusakan`, `biaya`, `created_at`, `updated_at`)
 --
 
 CREATE TABLE `migrations` (
-  `id` int(10) UNSIGNED NOT NULL,
+  `id` int UNSIGNED NOT NULL,
   `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `batch` int(11) NOT NULL
+  `batch` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -120,8 +127,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (31, '2019_08_19_000000_create_failed_jobs_table', 1),
 (32, '2019_12_14_000001_create_personal_access_tokens_table', 1),
 (33, '2022_01_18_154301_create_teknisi_table', 1),
-(34, '2022_01_18_155556_create_costumer_table', 1),
-(35, '2022_01_18_160020_create_kerusakan_table', 1);
+(35, '2022_01_18_160020_create_kerusakan_table', 1),
+(43, '2022_01_18_155556_create_costumer_table', 2);
 
 -- --------------------------------------------------------
 
@@ -142,12 +149,12 @@ CREATE TABLE `password_resets` (
 --
 
 CREATE TABLE `personal_access_tokens` (
-  `id` bigint(20) UNSIGNED NOT NULL,
+  `id` bigint UNSIGNED NOT NULL,
   `tokenable_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `tokenable_id` bigint(20) UNSIGNED NOT NULL,
+  `tokenable_id` bigint UNSIGNED NOT NULL,
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `token` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `abilities` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `abilities` text COLLATE utf8mb4_unicode_ci,
   `last_used_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -160,7 +167,7 @@ CREATE TABLE `personal_access_tokens` (
 --
 
 CREATE TABLE `teknisi` (
-  `id` bigint(20) UNSIGNED NOT NULL,
+  `id` bigint UNSIGNED NOT NULL,
   `nama_teknisi` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `username` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `no_hp` double NOT NULL,
@@ -175,7 +182,9 @@ CREATE TABLE `teknisi` (
 --
 
 INSERT INTO `teknisi` (`id`, `nama_teknisi`, `username`, `no_hp`, `password`, `no_tenan`, `created_at`, `updated_at`) VALUES
-(1, 'batam', 'batam', 899912, '12345678', 1, '2022-01-28 06:10:29', '2022-01-28 06:10:29');
+(1, 'batam', 'batam', 899912, '12345678', 1, '2022-01-28 06:10:29', '2022-01-28 06:10:29'),
+(2, 'wilda', 'wilda', 0, '12345678', 3, '2023-06-05 07:04:58', '2023-06-05 07:04:58'),
+(3, 'Rizki', 'rizki', 8, '12345678', 20, '2023-06-24 07:03:05', '2023-06-24 07:03:05');
 
 -- --------------------------------------------------------
 
@@ -184,7 +193,7 @@ INSERT INTO `teknisi` (`id`, `nama_teknisi`, `username`, `no_hp`, `password`, `n
 --
 
 CREATE TABLE `users` (
-  `id` bigint(20) UNSIGNED NOT NULL,
+  `id` bigint UNSIGNED NOT NULL,
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
@@ -199,8 +208,9 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'az.adyat', 'azadyat123@gmail.com', NULL, '$2y$10$RTec.AQMRBQMKoNy9f6xPeLMQlX1qr3K1NHnVZNzjj251a4ehwF2W', NULL, '2022-01-28 06:09:24', '2022-01-28 06:09:24'),
-(2, 'batam', 'batam123@gmail.com', NULL, '$2y$10$e9hLouE8jZ5VopksUfYOvuGMlUWiMZ8fanRnWY5xybZ9J8buDlNiW', NULL, '2022-01-30 03:50:19', '2022-01-30 03:50:19');
+(2, 'batam', 'batam123@gmail.com', NULL, '$2y$10$e9hLouE8jZ5VopksUfYOvuGMlUWiMZ8fanRnWY5xybZ9J8buDlNiW', NULL, '2022-01-30 03:50:19', '2022-01-30 03:50:19'),
+(3, 'admin', 'admin@tes.com', NULL, '$2y$10$KE.NJXWG3P6gBtZUgN5r0OWI3vfWMYO87DL1o6Yw45Pyg5smU5a9u', NULL, '2023-07-27 04:09:53', '2023-07-27 04:09:53'),
+(4, 'tenan2', 'tenan2@gmail.com', NULL, '12345678', NULL, NULL, NULL);
 
 --
 -- Indexes for dumped tables
@@ -266,43 +276,43 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT untuk tabel `costumer`
 --
 ALTER TABLE `costumer`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT untuk tabel `failed_jobs`
 --
 ALTER TABLE `failed_jobs`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT untuk tabel `kerusakan`
 --
 ALTER TABLE `kerusakan`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT untuk tabel `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 
 --
 -- AUTO_INCREMENT untuk tabel `personal_access_tokens`
 --
 ALTER TABLE `personal_access_tokens`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT untuk tabel `teknisi`
 --
 ALTER TABLE `teknisi`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT untuk tabel `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
