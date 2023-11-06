@@ -36,22 +36,16 @@ class ServisanController extends Controller
                 ->get();
         }
 
-        // $data = DB::table('costumer')->where('status_servisan', 0)->orWhere('status_servisan', 1)->orWhere('status_servisan', 2)->orderby('estimasi', 'ASC')->where('id_teknisi', $request->session()->get('id'))->get();
-
-        // dd($data);
-
-        // do {
-        //     $swapped = false;
-        //     for ($i = 0, $c = count($data) - 1; $i  <  $c; $i++) {
-        //         if ($data[$i] < $data[$i + 1]) {
-        //             list($data[$i + 1], $data[$i]) =
-        //                 array($data[$i], $data[$i + 1]);
-        //             $swapped = true;
-        //         }
-        //     }
-        // } while ($swapped);
-
-        // $data = $data->paginate(10);
+        do {
+            $swapped = false;
+            for ($i = 0, $c = count($data) - 1; $i  <  $c; $i++) {
+                if ($data[$i] < $data[$i + 1]) {
+                    list($data[$i + 1], $data[$i]) =
+                        array($data[$i], $data[$i + 1]);
+                    $swapped = true;
+                }
+            }
+        } while ($swapped);
 
         return view('teknisi.servisan.index', compact('data', 'keyword'));
     }
@@ -72,19 +66,19 @@ class ServisanController extends Controller
 
 
 
-        // $data = $data->toArray();
+        $data = $data->toArray();
 
-        // do {
-        //     $swapped = false;
-        //     for ($i = 0, $c = count($data) - 1; $i  <  $c; $i++) {
-        //         if ($data[$i] > $data[$i + 1]) {
-        //             list($data[$i + 1], $data[$i]) =
-        //                 array($data[$i], $data[$i + 1]);
-        //             $swapped = true;
-        //         }
-        //     }
-        // } while ($swapped);
-        // // dd($data);
+        do {
+            $swapped = false;
+            for ($i = 0, $c = count($data) - 1; $i  <  $c; $i++) {
+                if ($data[$i] > $data[$i + 1]) {
+                    list($data[$i + 1], $data[$i]) =
+                        array($data[$i], $data[$i + 1]);
+                    $swapped = true;
+                }
+            }
+        } while ($swapped);
+
 
         return view('teknisi.servisan.index', compact('data', 'keyword'));
     }
