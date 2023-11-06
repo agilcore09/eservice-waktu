@@ -12,7 +12,6 @@
 
      <!-- SidebarSearch Form -->
 
-
      <!-- Sidebar Menu -->
      <nav class="mt-2">
          <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
@@ -48,6 +47,15 @@
 
                  <ul class="nav nav-treeview">
                      <li class="nav-item">
+                         <a href="{{ url('/pembayaran') }}" class="nav-link">
+                             <i class="far fa-circle nav-icon"></i>
+                             <p>Pembayaran</p>
+                         </a>
+                     </li>
+                 </ul>
+
+                 <ul class="nav nav-treeview">
+                     <li class="nav-item">
                          <a href="{{ route('harga_servis') }}" class="nav-link">
                              <i class="far fa-circle nav-icon"></i>
                              <p>Harga Servis</p>
@@ -55,6 +63,7 @@
                      </li>
 
                  </ul>
+
 
                  <ul class="nav nav-treeview">
                      <li class="nav-item">

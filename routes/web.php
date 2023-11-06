@@ -56,6 +56,7 @@ Route::get('/show-input-servisan', [App\Http\Controllers\ServisanController::cla
 Route::post('/proses-input-servisan', [App\Http\Controllers\ServisanController::class, 'store'])->name('store_servisan');
 Route::get('/list-harga', [App\Http\Controllers\ServisanController::class, 'harga'])->name('harga_servis');
 Route::get('/data-sort', [ServisanController::class, 'data_sort']);
+Route::get('/pembayaran', [ServisanController::class, 'pembayaran']);
 //Cari servisan
 Route::get('/cari-servisan', [App\Http\Controllers\ServisanController::class, 'cari_servisan'])->name('cari_servisan');
 //Cari harga servisan

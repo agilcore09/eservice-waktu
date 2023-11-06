@@ -327,4 +327,9 @@ class ServisanController extends Controller
         $data = DB::table('costumer')->orderby('estimasi', 'ASC')->get();
         return view('teknisi.servisan.data_sort', compact('data'));
     }
+
+    public function pembayaran(Request $request)
+    {
+        return view('teknisi.servisan.pembayaran');
+    }
 }
