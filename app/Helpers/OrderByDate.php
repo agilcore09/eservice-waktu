@@ -7,6 +7,24 @@ use Illuminate\Support\Facades\DB;
 class OrderHelper
 {
 
+    public static function bubbleSort($array)
+    {
+
+        $n = count($array);
+        for ($i = 0; $i < $n - 1; $i++) {
+            for ($j = 0; $j < $n - $i - 1; $j++) {
+                if ($array[$j]->estimasi < $array[$j + 1]->estimasi) {
+                    // Tukar elemen jika elemen saat ini lebih kecil dari elemen berikutnya
+                    $temp = $array[$j];
+                    $array[$j] = $array[$j + 1];
+                    $array[$j + 1] = $temp;
+                }
+            }
+        }
+        return $array;
+    }
+
+
     public static function orderDate($dateIn, $dateTo, $session)
     {
         $data = DB::table('costumer')

@@ -34,18 +34,22 @@ class ServisanController extends Controller
                 ->orWhere('status_servisan', 2)
                 ->orderby("estimasi", "ASC")
                 ->get();
+
+            $data = OrderHelper::bubbleSort($data);
         }
 
-        do {
-            $swapped = false;
-            for ($i = 0, $c = count($data) - 1; $i  <  $c; $i++) {
-                if ($data[$i] < $data[$i + 1]) {
-                    list($data[$i + 1], $data[$i]) =
-                        array($data[$i], $data[$i + 1]);
-                    $swapped = true;
-                }
-            }
-        } while ($swapped);
+
+
+        // do {
+        //     $swapped = false;
+        //     for ($i = 0, $c = count($data) - 1; $i  <  $c; $i++) {
+        //         if ($data[$i] < $data[$i + 1]) {
+        //             list($data[$i + 1], $data[$i]) =
+        //                 array($data[$i], $data[$i + 1]);
+        //             $swapped = true;
+        //         }
+        //     }
+        // } while ($swapped);
 
         return view('teknisi.servisan.index', compact('data', 'keyword'));
     }
