@@ -48,8 +48,6 @@ Route::get('/login-teknisi', [App\Http\Controllers\LoginTeknisiController::class
 Route::post('/login-proses', [App\Http\Controllers\LoginTeknisiController::class, 'store'])->name('proses_login');
 Route::get('/logout', [App\Http\Controllers\LoginTeknisiController::class, 'logout'])->name('logout-teknisi');
 
-
-
 //Servisan
 Route::get('/show-home-servisan', [App\Http\Controllers\ServisanController::class, 'homeser'])->name('homeser');
 Route::get('/show-servisan', [App\Http\Controllers\ServisanController::class, 'index'])->name('show_Servisan');

@@ -95,6 +95,7 @@ class ServisanController extends Controller
         $now = Carbon::now();
         $thnbulan = $now->year . $now->month;
         $cek = costumer::count();
+        $harga = kerusakan::all();
         //dd($cek);
         if ($cek == 0) {
             $urut = 1001;
@@ -108,8 +109,7 @@ class ServisanController extends Controller
             // dd($nomor);
         }
 
-
-        return view('teknisi.servisan.create', compact('nomor', 'data'));
+        return view('teknisi.servisan.create', compact('nomor', 'data', 'harga'));
     }
 
     /**
