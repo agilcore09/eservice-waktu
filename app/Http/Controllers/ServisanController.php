@@ -38,28 +38,12 @@ class ServisanController extends Controller
             // implementasi bubble sort
             $data = OrderHelper::bubbleSort($data);
         }
-
-
-
-        // do {
-        //     $swapped = false;
-        //     for ($i = 0, $c = count($data) - 1; $i  <  $c; $i++) {
-        //         if ($data[$i] < $data[$i + 1]) {
-        //             list($data[$i + 1], $data[$i]) =
-        //                 array($data[$i], $data[$i + 1]);
-        //             $swapped = true;
-        //         }
-        //     }
-        // } while ($swapped);
-
         return view('teknisi.servisan.index', compact('data', 'keyword'));
     }
 
     public function index_selesai(Request $request)
     {
-
         $keyword = null;
-
         if ($request->dateIn && $request->dateTo != null) {
             $data = OrderHelper::orderDateClear($request->dateIn, $request->dateTo, $request->session()->get('id'));
         } else {
@@ -70,21 +54,6 @@ class ServisanController extends Controller
 
             $data = OrderHelper::bubbleSortSelesai($data);
         }
-
-        // $data = $data->toArray();
-
-        // do {
-        //     $swapped = false;
-        //     for ($i = 0, $c = count($data) - 1; $i  <  $c; $i++) {
-        //         if ($data[$i] > $data[$i + 1]) {
-        //             list($data[$i + 1], $data[$i]) =
-        //                 array($data[$i], $data[$i + 1]);
-        //             $swapped = true;
-        //         }
-        //     }
-        // } while ($swapped);
-
-
         return view('teknisi.servisan.index', compact('data', 'keyword'));
     }
 
@@ -107,11 +76,9 @@ class ServisanController extends Controller
             $nomor = 'CS:' . $thnbulan . $urut;
             //dd($nomor);
         } else {
-
             $ambil = costumer::all()->last();
             $urut = (int)substr($ambil->kd_transaksi, -4) + 1;
             $nomor = 'CS:' . $thnbulan . $urut;
-            // dd($nomor);
         }
 
         return view('teknisi.servisan.create', compact('nomor', 'data', 'harga'));
@@ -149,10 +116,6 @@ class ServisanController extends Controller
 
         // dd($date);
 
-
-
-
-
         $cek_servisan = costumer::where('id_teknisi', $request->session()->get('id'))->where('status', 0)->first();
         $pesanan = new costumer;
         $pesanan->id_teknisi = $request->session()->get('id');
@@ -168,13 +131,11 @@ class ServisanController extends Controller
         $pesanan->status_servisan = 0;
         $pesanan->tgl_masuk = $tanggal;
         $pesanan->status = $request->input('status');
-        // dd($pesanan);
 
         Alert::success('Berhasil', 'Data Berhasil Di Simpan');
 
         $pesanan->save();
         return redirect('/show-servisan');
-        // dd($pesanan);
     }
 
     /**
@@ -186,20 +147,11 @@ class ServisanController extends Controller
     public function selesai($id)
     {
         $tanggal = Carbon::now();
-        // $tanggal = DateTime::createFromFormat();
-        //  $date = $request->estimasi;
         $servisan = costumer::where('id', $id)->first();
-        //   dd($pesanan);
-
         $servisan->tgl_selesai = $tanggal;
         $servisan->status_servisan = 4;
-        //$servisan->status = 1;
-        //  dd($servisan);
-
-
         $servisan->update();
         Alert::success('Servisan Telah Selesai');
-
         return redirect('/show-servisan');
     }
 
@@ -207,20 +159,10 @@ class ServisanController extends Controller
     public function dikerja($id)
     {
         $tanggal = Carbon::now();
-        // $tanggal = DateTime::createFromFormat();
-        //  $date = $request->estimasi;
         $servisan = costumer::where('id', $id)->first();
-        //   dd($pesanan);
-
-        // $servisan->tgl_selesai = $tanggal;
         $servisan->status_servisan = 1;
-        //$servisan->status = 1;
-        //  dd($servisan);
-
-
         $servisan->update();
         Alert::success('Servisan dikerjakan');
-
         return redirect('/show-servisan');
     }
 
@@ -303,29 +245,22 @@ class ServisanController extends Controller
     public function cari_servisan(Request $request)
     {
         $keyword = $request->search;
-
         $data = costumer::where('id_teknisi', $request->session()->get('id'))
-
             ->where('nama_costumer', 'like', "%" . $keyword . "%")
-
             ->get();
-        // dd($data);
         return view('teknisi.servisan.index', compact('data', 'keyword'));
     }
 
     public function cari_harga(Request $request)
     {
         $keyword = $request->search;
-
         $data = kerusakan::where('kerusakan', 'like', "%" . $keyword . "%",)
             ->get();
-        // dd($data);
         return view('teknisi.servisan.list_harga', compact('data', 'keyword'));
     }
 
     public function data_sort(Request $request)
     {
-        // jika tidak login 
         if ($request->session()->get('id') == null) {
             return redirect("login-teknisi")->with('message', Alert::error('Belum login', 'Kamu Belum Login Sebagai Teknisi'));
         }
@@ -335,6 +270,19 @@ class ServisanController extends Controller
 
     public function pembayaran(Request $request)
     {
-        return view('teknisi.servisan.pembayaran');
+        if ($request->dateIn) {
+            $data = DB::table('costumer')
+                ->where('status', 1)
+                ->where('id_teknisi', $request->session()->get('id'))
+                ->where('tgl_masuk', $request->dateIn)
+                ->get();
+        } else {
+            $data = DB::table('costumer')
+                ->where('status', '=', 1)
+                ->where('id_teknisi', $request->session()->get('id'))
+                ->get();
+        }
+
+        return view('teknisi.servisan.pembayaran', compact("data"));
     }
 }

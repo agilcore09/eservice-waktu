@@ -49,10 +49,7 @@
                                 <div class="row pl-3">
                                     <div class="col-md-4">
                                         <form method="GET">
-
-
                                             <div class="form-group">
-
                                                 <div class="form-group input-group">
                                                     <div class="input-group-prepend">
                                                         <span class="input-group-text"><i
@@ -65,9 +62,7 @@
 
                                     </div>
                                     <div class="col-md-4">
-
                                         <div class="form-group">
-
                                             <div class="form-group input-group">
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text"><i class="fa-solid fa-calendar-days"></i>
