@@ -35,6 +35,7 @@ class ServisanController extends Controller
                 ->orderby("estimasi", "ASC")
                 ->get();
 
+            // implementasi bubble sort
             $data = OrderHelper::bubbleSort($data);
         }
 
@@ -66,22 +67,22 @@ class ServisanController extends Controller
                 ->orderby("updated_at", "ASC")
                 ->where('id_teknisi', $request->session()->get('id'))
                 ->get();
+
+            $data = OrderHelper::bubbleSortSelesai($data);
         }
 
+        // $data = $data->toArray();
 
-
-        $data = $data->toArray();
-
-        do {
-            $swapped = false;
-            for ($i = 0, $c = count($data) - 1; $i  <  $c; $i++) {
-                if ($data[$i] > $data[$i + 1]) {
-                    list($data[$i + 1], $data[$i]) =
-                        array($data[$i], $data[$i + 1]);
-                    $swapped = true;
-                }
-            }
-        } while ($swapped);
+        // do {
+        //     $swapped = false;
+        //     for ($i = 0, $c = count($data) - 1; $i  <  $c; $i++) {
+        //         if ($data[$i] > $data[$i + 1]) {
+        //             list($data[$i + 1], $data[$i]) =
+        //                 array($data[$i], $data[$i + 1]);
+        //             $swapped = true;
+        //         }
+        //     }
+        // } while ($swapped);
 
 
         return view('teknisi.servisan.index', compact('data', 'keyword'));
