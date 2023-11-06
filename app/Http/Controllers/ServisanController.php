@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\DB;
 use RealRashid\SweetAlert\Facades\Alert;
 use App\Helpers\OrderHelper;
 
+use function PHPUnit\Framework\isEmpty;
+
 class ServisanController extends Controller
 {
     /**
@@ -24,12 +26,7 @@ class ServisanController extends Controller
 
         if ($request->dateIn && $request->dateTo != null) {
 
-            // $data = OrderHelper::orderDate($request->dateIn, $request->dateTo, $request->session()->get('id'));
-
-            $data = DB::table('costumer')
-                ->whereBetween('tgl_masuk', [$request->dateIn, $request->dateTo])
-                ->where('id_teknisi', $request->session()->get('id'))
-                ->get();
+            $data = OrderHelper::orderDate($request->dateIn, $request->dateTo, $request->session()->get('id'));
         } else {
             $data = DB::table('costumer')->where('id_teknisi', $request->session()->get('id'))
                 ->where('status_servisan', 0)
@@ -38,7 +35,6 @@ class ServisanController extends Controller
                 ->orderby("estimasi", "ASC")
                 ->get();
         }
-
 
         // $data = DB::table('costumer')->where('status_servisan', 0)->orWhere('status_servisan', 1)->orWhere('status_servisan', 2)->orderby('estimasi', 'ASC')->where('id_teknisi', $request->session()->get('id'))->get();
 
